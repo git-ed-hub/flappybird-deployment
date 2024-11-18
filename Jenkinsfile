@@ -36,6 +36,7 @@ pipeline {
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
                   sh "git push ${REPO} main"
+                }
             }
         }
     }
