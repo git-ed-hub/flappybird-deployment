@@ -4,6 +4,7 @@ pipeline {
         APP_NAME = "nginx-game-pipeline"
         GIT_USER = "git-ed-hub"
         GIT_TOKEN = 'github'
+        GIT_EMAIL = 'email'
     }
     stages {
         stage("Cleanup Workspace") {
@@ -28,10 +29,13 @@ pipeline {
         stage("Push the changed deployment file to Git") {
             steps {
                 sh """
+                   git config --global user.name ${GIT_USER}
+                   git config --global user.email ${GIT_EMAIL}
                    git add deployment.yaml
                    git commit -m "Updated Deployment Manifest"
                 """
-                sh "git push https://${GIT_USER}:${github}@github.com/${GIT_USER}/flappybird-deployment.git main"
+                withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
+                  sh "git push https://github.com/git-ed-hub/flappybird-deployment.git main"
             }
         }
     }
