@@ -5,6 +5,7 @@ pipeline {
         GIT_USER = "git-ed-hub"
         GIT_TOKEN = 'github'
         GIT_EMAIL = 'email'
+        REPO = 'https://github.com/git-ed-hub/flappybird-deployment.git'
     }
     stages {
         stage("Cleanup Workspace") {
@@ -14,7 +15,7 @@ pipeline {
         }
         stage("Checkout from SCM") {
                steps {
-                   git branch: 'main', credentialsId: 'github', url: 'https://github.com/git-ed-hub/flappybird-deployment.git'
+                   git branch: 'main', credentialsId: 'github', url: ${REPO}
                }
         }
         stage("Update the Deployment Tags") {
@@ -35,7 +36,7 @@ pipeline {
                    git commit -m "Updated Deployment Manifest"
                 """
                 withCredentials([gitUsernamePassword(credentialsId: 'github', gitToolName: 'Default')]) {
-                  sh "git push https://github.com/git-ed-hub/flappybird-deployment.git main"
+                  sh "git push ${REPO} main"
             }
         }
     }
