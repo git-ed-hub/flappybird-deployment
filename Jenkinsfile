@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        APP_NAME = "testsysadmin8//nginx-game"
+        APP_NAME = "nginx-game-pipeline"
         GIT_USER = "git-ed-hub"
         GIT_TOKEN = 'github'
     }
