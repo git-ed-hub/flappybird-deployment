@@ -3,7 +3,6 @@ pipeline {
     environment {
         APP_NAME = "nginx-game-pipeline"
         GIT_USER = "git-ed-hub"
-        GIT_TOKEN = 'github'
         REPO = 'https://github.com/git-ed-hub/flappybird-deployment.git'
     }
     stages {
@@ -13,9 +12,9 @@ pipeline {
             }
         }
         stage("Checkout from SCM") {
-               steps {
-                   git branch: 'main', credentialsId: 'github', url: ${REPO}
-               }
+            steps {
+                git branch: 'main', credentialsId: 'github', url: REPO
+            }
         }
         stage("Update the Deployment Tags") {
             steps {
