@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: nginx-game
-          image: testsysadmin8/nginx-game-pipeline:latest
+          image: testsysadmin8/nginx-game-pipeline:1.0.0-18
           imagePullPolicy: IfNotPresent
           resources:
             limits:
